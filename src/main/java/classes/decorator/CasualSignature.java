@@ -18,6 +18,6 @@ public class CasualSignature extends TextDecorator {
     }
 
     public void append() {
-        appendSignature("Casual Greeting Hallo XY");
+        appendSignature("\nViele Grüße,\ndie FH-Leitung");
     }
 }

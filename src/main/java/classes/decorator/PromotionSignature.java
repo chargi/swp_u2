@@ -18,6 +18,6 @@ public class PromotionSignature extends TextDecorator {
     }
 
     public void append() {
-        appendSignature("Casual Greeting Hallo XY");
+        appendSignature("\nVersendet mit fh-notify.");
     }
 }

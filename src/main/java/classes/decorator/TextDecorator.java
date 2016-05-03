@@ -16,6 +16,7 @@ import java.util.Map;
 
 public abstract class TextDecorator implements MessageText {
     protected List<Alias> aliasesWithText = new ArrayList<Alias>();
+    protected final String placeholder = "###XYNAME###";
 
 
     public TextDecorator(ArrayList<Alias> a) {
@@ -36,7 +37,7 @@ public abstract class TextDecorator implements MessageText {
             String name = a.getName();
             String at = appendText;
 
-            at.replace("XYNAME",name);
+            at.replace(placeholder,name);
             a.setMessage(at+mt);
         }
     }

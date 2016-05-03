@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/swp_u2.iml" filepath="$PROJECT_DIR$/.idea/swp_u2.iml" />
       <module fileurl="file://$PROJECT_DIR$/swp_u2.iml" filepath="$PROJECT_DIR$/swp_u2.iml" />
     </modules>
   </component>

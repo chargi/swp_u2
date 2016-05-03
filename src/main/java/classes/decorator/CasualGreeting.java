@@ -18,6 +18,6 @@ public class CasualGreeting extends TextDecorator {
     }
 
     public void append() {
-        appendGreeting("Casual Greeting Hallo XY");
+        appendGreeting("Hallo "+placeholder+", \n");
     }
 }
