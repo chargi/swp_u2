@@ -19,7 +19,7 @@ public abstract class TextDecorator implements MessageText {
     protected final String placeholder = "###XYNAME###";
 
 
-    public TextDecorator(ArrayList<Alias> a) {
+    public TextDecorator(List<Alias> a) {
         aliasesWithText = a;
     }
 

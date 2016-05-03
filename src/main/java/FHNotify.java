@@ -1,3 +1,16 @@
+import classes.composite.AliasBook;
+import classes.composite.User;
+import classes.decorator.CasualGreeting;
+import classes.decorator.CasualSignature;
+import classes.decorator.ChristmasSignature;
+import classes.decorator.TextDecorator;
+import interfaces.Alias;
+import interfaces.MessageText;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Chargi on 3.5.2016.
  */
@@ -14,12 +27,26 @@ public class FHNotify {
 
         //Insert code here
 
+        //MockCode
+        AliasBook bif14 = new AliasBook("BIF14");
+        bif14.addAlias(new User("Alexa Hundertwasser"));
+
+        List<Alias> mockAlias = new ArrayList<Alias>(
+                Arrays.asList(
+                        new User("Max Test"),
+                        bif14
+                )
+            );
+
         /* Message einlesen
         * Nur Text einlesen
         * arg: --message path
         */
 
         //Insert code here
+
+        //MockCode
+        String message = "Ich bin eine Mockup-Message";
 
         /* DECORATOR
         * Formattiere die Message
@@ -32,7 +59,14 @@ public class FHNotify {
         *    christmas
         */
 
-        //Insert code here
+        TextDecorator first = new CasualGreeting(mockAlias);
+        TextDecorator second = new CasualSignature(first);
+        TextDecorator third = new ChristmasSignature(second);
+
+        for (Alias a : third.getAliasesWithText()) {
+            //System.out.println(a.getMessage());
+            System.out.println(a.getName());
+        }
 
 
         /* STRATEGY

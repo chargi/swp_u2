@@ -1,5 +1,6 @@
 package classes.composite;
 
+import com.github.fhtw.swp.tutorium.composite.ComponentOperation;
 import interfaces.Alias;
 
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ public class AliasBook implements Alias {
         this.name = name;
     }
 
+    public void addAlias(Alias a) {
+        al.add(a);
+    }
+
     public String getName() {
         return name;
     }
@@ -25,6 +30,7 @@ public class AliasBook implements Alias {
         return message;
     }
 
+    @ComponentOperation(argumentsProvider = SetMessageArgumentsProvider.class)
     public void setMessage(String s) {
         message = s;
     }
