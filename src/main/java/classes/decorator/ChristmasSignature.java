@@ -10,15 +10,14 @@ import java.util.List;
  * Created by Chargi on 3.5.2016.
  */
 public class ChristmasSignature extends TextDecorator {
-    public ChristmasSignature(List<Alias> a) {
-        super(a);
+    public ChristmasSignature(String a, String b) {
+        super(a,b);
     }
-
     public ChristmasSignature(TextDecorator decorator) {
         super(decorator);
     }
 
-    public void append() {
-        appendSignature("\nFrohe Weihnachten wünscht,\ndie FH-Leitung");
+    public void decorate() {
+        setText("\nFrohe Weihnachten wünscht,\ndie FH-Leitung");
     }
 }

@@ -15,47 +15,37 @@ import java.util.Map;
 
 
 public abstract class TextDecorator implements MessageText {
-    protected List<Alias> aliasesWithText = new ArrayList<Alias>();
-    protected final String placeholder = "###XYNAME###";
+    private String name;
+    private String text;
 
-
-    public TextDecorator(List<Alias> a) {
-        aliasesWithText = a;
+    public TextDecorator(String name, String text) {
+        this.name = name;
+        this.text = text;
     }
 
     public TextDecorator(TextDecorator decorator) {
-        aliasesWithText = decorator.getAliasesWithText();
+        this.name = decorator.getName();
+        this.text = decorator.getText();
     }
 
-    public void append() {
+    public void decorate() {
 
     }
 
-    public void appendGreeting(String appendText) {
-        for (Alias a : aliasesWithText) {
-            String mt = a.getMessage();
-            String name = a.getName();
-            String at = appendText;
-
-            at.replace(placeholder,name);
-            a.setMessage(at+mt);
-        }
+    public String getName() {
+        return name;
     }
 
-    public void appendSignature(String appendText) {
-        for (Alias a : aliasesWithText) {
-            String mt = a.getMessage();
-            String at = appendText;
-
-            a.setMessage(mt+at);
-        }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<Alias> getAliasesWithText() {
-        return aliasesWithText;
+    public String getText() {
+        return text;
     }
 
-    public void setAliasesWithText(List<Alias> aliasesWithText) {
-        this.aliasesWithText = aliasesWithText;
+    public void setText(String text) {
+        this.text = text;
     }
 }
+

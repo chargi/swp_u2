@@ -28,15 +28,10 @@ public class FHNotify {
         //Insert code here
 
         //MockCode
-        AliasBook bif14 = new AliasBook("BIF14");
-        bif14.addAlias(new User("Alexa Hundertwasser"));
-
-        List<Alias> mockAlias = new ArrayList<Alias>(
-                Arrays.asList(
-                        new User("Max Test"),
-                        bif14
-                )
-            );
+        List<String> distribution = new ArrayList<String>();
+        distribution.add("Alexa Hundert");
+        distribution.add("Max Test");
+        distribution.add("Berni Blume");
 
         /* Message einlesen
         * Nur Text einlesen
@@ -59,13 +54,11 @@ public class FHNotify {
         *    christmas
         */
 
-        TextDecorator first = new CasualGreeting(mockAlias);
-        TextDecorator second = new CasualSignature(first);
-        TextDecorator third = new ChristmasSignature(second);
-
-        for (Alias a : third.getAliasesWithText()) {
-            //System.out.println(a.getMessage());
-            System.out.println(a.getName());
+        for (String name : distribution) {
+            TextDecorator first = new CasualGreeting(name,message);
+            TextDecorator second = new CasualSignature(first);
+            TextDecorator third = new ChristmasSignature(second);
+            System.out.println(third.getText());
         }
 
 

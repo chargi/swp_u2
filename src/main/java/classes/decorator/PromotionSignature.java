@@ -10,15 +10,14 @@ import java.util.List;
  * Created by Chargi on 3.5.2016.
  */
 public class PromotionSignature extends TextDecorator {
-    public PromotionSignature(List<Alias> a) {
-        super(a);
+    public PromotionSignature(String a, String b) {
+        super(a,b);
     }
-
     public PromotionSignature(TextDecorator decorator) {
         super(decorator);
     }
 
-    public void append() {
-        appendSignature("\nVersendet mit fh-notify.");
+    public void decorate() {
+        setText("\nVersendet mit fh-notify.");
     }
 }
