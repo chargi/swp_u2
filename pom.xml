@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.fhtechnikum.swpu2</groupId>
+    <groupId>org.fhtechnikum.fhnotify</groupId>
     <artifactId>fhnotify</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>com.github.fhtw-swp-tutorium</groupId>
             <artifactId>annotations</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

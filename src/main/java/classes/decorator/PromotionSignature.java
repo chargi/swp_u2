@@ -18,6 +18,6 @@ public class PromotionSignature extends TextDecorator {
     }
 
     public void decorate() {
-        setText("\nVersendet mit fh-notify.");
+        setText(getText()+"\nVersendet mit fh-notify.");
     }
 }

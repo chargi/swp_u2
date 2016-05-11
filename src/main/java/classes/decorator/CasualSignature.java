@@ -18,6 +18,6 @@ public class CasualSignature extends TextDecorator {
     }
 
     public void decorate() {
-        setText("\nViele Grüße,\ndie FH-Leitung");
+        setText(getText()+"\nViele Grüße,\ndie FH-Leitung");
     }
 }

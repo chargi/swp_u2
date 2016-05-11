@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class FHNotify {
     public static void main(String[] args) {
-        System.out.println("Hello the World!");
+        System.out.println("--Starting FHNotify--\n");
 
         /* COMPOSITION
         * Config File einlesen
@@ -56,8 +56,11 @@ public class FHNotify {
 
         for (String name : distribution) {
             TextDecorator first = new CasualGreeting(name,message);
+            first.decorate();
             TextDecorator second = new CasualSignature(first);
+            second.decorate();
             TextDecorator third = new ChristmasSignature(second);
+            third.decorate();
             System.out.println(third.getText());
         }
 

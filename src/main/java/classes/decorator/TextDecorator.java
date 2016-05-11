@@ -24,8 +24,8 @@ public abstract class TextDecorator implements MessageText {
     }
 
     public TextDecorator(TextDecorator decorator) {
-        this.name = decorator.getName();
-        this.text = decorator.getText();
+        setName(decorator.getName());
+        setText(decorator.getText());
     }
 
     public void decorate() {

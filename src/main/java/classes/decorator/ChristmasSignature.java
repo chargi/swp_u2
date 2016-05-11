@@ -18,6 +18,6 @@ public class ChristmasSignature extends TextDecorator {
     }
 
     public void decorate() {
-        setText("\nFrohe Weihnachten wünscht,\ndie FH-Leitung");
+        setText(getText()+"\nFrohe Weihnachten wünscht,\ndie FH-Leitung");
     }
 }
