@@ -1,10 +1,13 @@
 package interfaces;
 
+import com.github.fhtw.swp.tutorium.composite.ComponentOperation;
+
+import java.util.List;
+
 /**
  * Created by Chargi on 3.5.2016.
  */
 public interface Alias {
-    public String getName();
-    public String getMessage();
-    public void setMessage(String s);
+    @ComponentOperation
+    public List<Alias> convertToList();
 }

@@ -1,6 +1,5 @@
 package interfaces;
 
-import classes.composite.SetMessageArgumentsProvider;
 import classes.decorator.CasualGreeting;
 import com.github.fhtw.swp.tutorium.command.Invoker;
 import com.github.fhtw.swp.tutorium.composite.ComponentOperation;

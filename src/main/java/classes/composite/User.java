@@ -1,13 +1,18 @@
 package classes.composite;
 
+import com.github.fhtw.swp.tutorium.composite.ComponentOperation;
+import com.github.fhtw.swp.tutorium.composite.Leaf;
 import interfaces.Alias;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Chargi on 3.5.2016.
  */
+@Leaf(value = Alias.class)
 public class User implements Alias {
     private String name;
-    private String message;
 
     public User(String name) {
         this.name = name;
@@ -17,11 +22,10 @@ public class User implements Alias {
         return name;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String s) {
-        message = s;
+    @Override
+    public List<Alias> convertToList() {
+        List<Alias> temp = new ArrayList<>();
+        temp.add(this);
+        return temp;
     }
 }
