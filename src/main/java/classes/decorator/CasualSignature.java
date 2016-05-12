@@ -1,5 +1,6 @@
 package classes.decorator;
 
+import com.github.fhtw.swp.tutorium.decorator.Decorator;
 import interfaces.Alias;
 import interfaces.MessageText;
 
@@ -9,7 +10,8 @@ import java.util.List;
 /**
  * Created by Chargi on 3.5.2016.
  */
-public class CasualSignature extends TextDecorator {
+@Decorator(value = MessageText.class)
+public class CasualSignature extends TextDecorator implements MessageText{
     public CasualSignature(String a, String b) {
         super(a,b);
     }

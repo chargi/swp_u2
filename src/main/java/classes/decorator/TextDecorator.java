@@ -1,6 +1,8 @@
 package classes.decorator;
 
 
+import com.github.fhtw.swp.tutorium.decorator.Component;
+import com.github.fhtw.swp.tutorium.decorator.Decorator;
 import interfaces.Alias;
 import interfaces.MessageText;
 
@@ -12,20 +14,16 @@ import java.util.Map;
 /**
  * Created by Chargi on 3.5.2016.
  */
-
-
 public abstract class TextDecorator implements MessageText {
-    private String name;
-    private String text;
+    @Component
+    private MessageText baseText;
 
     public TextDecorator(String name, String text) {
-        this.name = name;
-        this.text = text;
+        baseText = new TextStorage(name, text);
     }
 
     public TextDecorator(TextDecorator decorator) {
-        setName(decorator.getName());
-        setText(decorator.getText());
+        baseText = new TextStorage(decorator);
     }
 
     public void decorate() {
@@ -33,19 +31,19 @@ public abstract class TextDecorator implements MessageText {
     }
 
     public String getName() {
-        return name;
+        return baseText.getName();
     }
 
     public void setName(String name) {
-        this.name = name;
+        baseText.setName(name);
     }
 
     public String getText() {
-        return text;
+        return baseText.getText();
     }
 
     public void setText(String text) {
-        this.text = text;
+        baseText.setText(text);
     }
 }
 
