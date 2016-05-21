@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/fhnotify.iml" filepath="$PROJECT_DIR$/fhnotify.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swp_u2.iml" filepath="$PROJECT_DIR$/swp_u2.iml" />
     </modules>
   </component>
 </project>

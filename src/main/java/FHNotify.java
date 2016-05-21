@@ -4,8 +4,10 @@ import classes.decorator.CasualGreeting;
 import classes.decorator.CasualSignature;
 import classes.decorator.ChristmasSignature;
 import classes.decorator.TextDecorator;
+import classes.strategy.Whatsapp;
 import interfaces.Alias;
 import interfaces.MessageText;
+import interfaces.Strategy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,16 @@ import java.util.List;
 public class FHNotify {
     public static void main(String[] args) {
         System.out.println("--Starting FHNotify--\n");
+
+        //Set arguments
+        String configPath;
+        String messagePath;
+        List<String> formatIdentifiers = new ArrayList<>();
+        String strategy;
+
+        //TODO: OptionParser
+        //OptionParser parser = new OptionParser( "a:" );
+        //OptionSet options = parser.parse( "-a", "foo", "-abar", "-a=baz" );
 
         /* COMPOSITION
         * Config File einlesen
@@ -39,9 +51,11 @@ public class FHNotify {
         */
 
         //Insert code here
+        String message = "Blabla";
+        Strategy chosenStrategy = new Whatsapp();
 
-        //MockCode
-        String message = "Ich bin eine Mockup-Message";
+        //For each subject in distribution, decorate the message and act according to the chosen strategy
+        for (String subject : distribution) {
 
         /* DECORATOR
         * Formattiere die Message
@@ -54,15 +68,15 @@ public class FHNotify {
         *    christmas
         */
 
-        for (String name : distribution) {
-            TextDecorator first = new CasualGreeting(name,message);
-            first.decorate();
-            TextDecorator second = new CasualSignature(first);
-            second.decorate();
-            TextDecorator third = new ChristmasSignature(second);
-            third.decorate();
-            System.out.println(third.getText());
-        }
+            for (String name : distribution) {
+                TextDecorator first = new CasualGreeting(name, message);
+                first.decorate();
+                TextDecorator second = new CasualSignature(first);
+                second.decorate();
+                TextDecorator third = new ChristmasSignature(second);
+                third.decorate();
+                System.out.println(third.getText());
+            }
 
 
         /* STRATEGY
@@ -73,8 +87,6 @@ public class FHNotify {
         *          email
         */
 
-        //Insert code here
-
         /* Save Messages to File
         * recipient1,recipient2,recipient3,...,recipientN
         * check if recipients are validated
@@ -83,6 +95,14 @@ public class FHNotify {
         * path: transportweg\recipient
         *   e.g.: whatsapp\if14b001
         */
+
+            chosenStrategy.setMessage(message);
+            chosenStrategy.setUser(subject);
+            chosenStrategy.saveMessage();
+
+
+
+        }
 
 
     }

@@ -7,5 +7,9 @@ import interfaces.Strategy;
  * Created by Chargi on 3.5.2016.
  */
 @ConcreteStrategy(value = Strategy.class)
-public class Email implements Strategy {
+public class Email extends SaveContext implements Strategy {
+
+    public Email() {
+        setSavePath("email");
+    }
 }

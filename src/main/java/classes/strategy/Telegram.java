@@ -8,5 +8,9 @@ import interfaces.Strategy;
  * Created by Chargi on 3.5.2016.
  */
 @ConcreteStrategy(value = Strategy.class)
-public class Telegram implements Strategy {
+public class Telegram extends SaveContext implements Strategy {
+
+    public Telegram() {
+        setSavePath("telegram");
+    }
 }
