@@ -6,5 +6,6 @@ package interfaces;
 public interface Strategy {
     void setMessage(String message);
     void setUser(String user);
+    boolean canHandle(String identifier);
     void saveMessage();
 }

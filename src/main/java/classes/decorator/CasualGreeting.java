@@ -1,22 +1,24 @@
 package classes.decorator;
 
-import com.github.fhtw.swp.tutorium.decorator.Decorator;
-import interfaces.Alias;
-import interfaces.MessageText;
-
-import java.util.ArrayList;
-import java.util.List;
+import interfaces.Formatter;
 
 /**
  * Created by Chargi on 3.5.2016.
  */
-@Decorator(value = MessageText.class)
-public class CasualGreeting extends TextDecorator implements MessageText {
+@com.github.fhtw.swp.tutorium.decorator.Decorator(value = Formatter.class)
+public class CasualGreeting extends TextFormatter implements Formatter {
     public CasualGreeting(String a, String b) {
         super(a,b);
+        setIdentifier("casual-greeting");
     }
-    public CasualGreeting(TextDecorator decorator) {
+    public CasualGreeting(TextFormatter decorator) {
         super(decorator);
+        setIdentifier("casual-greeting");
+    }
+
+    public CasualGreeting() {
+        super();
+        setIdentifier("casual-greeting");
     }
 
     public void decorate() {

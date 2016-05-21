@@ -1,22 +1,24 @@
 package classes.decorator;
 
-import com.github.fhtw.swp.tutorium.decorator.Decorator;
-import interfaces.Alias;
-import interfaces.MessageText;
-
-import java.util.ArrayList;
-import java.util.List;
+import interfaces.Formatter;
 
 /**
  * Created by Chargi on 3.5.2016.
  */
-@Decorator(value = MessageText.class)
-public class ChristmasSignature extends TextDecorator implements MessageText {
+@com.github.fhtw.swp.tutorium.decorator.Decorator(value = Formatter.class)
+public class ChristmasSignature extends TextFormatter implements Formatter {
     public ChristmasSignature(String a, String b) {
         super(a,b);
+        setIdentifier("christmas");
     }
-    public ChristmasSignature(TextDecorator decorator) {
+    public ChristmasSignature(TextFormatter decorator) {
         super(decorator);
+        setIdentifier("christmas");
+    }
+
+    public ChristmasSignature() {
+        super();
+        setIdentifier("christmas");
     }
 
     public void decorate() {

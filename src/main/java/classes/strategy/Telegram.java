@@ -12,5 +12,6 @@ public class Telegram extends SaveContext implements Strategy {
 
     public Telegram() {
         setSavePath("telegram");
+        setIdentifier("telegram");
     }
 }

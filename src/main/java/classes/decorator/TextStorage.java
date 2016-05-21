@@ -1,13 +1,11 @@
 package classes.decorator;
 
-import com.github.fhtw.swp.tutorium.decorator.Component;
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
-import interfaces.MessageText;
+import interfaces.Formatter;
 
 /**
  * Created by chargi on 12.05.2016.
  */
-public class TextStorage implements MessageText {
+public class TextStorage implements Formatter {
     private String name;
     private String text;
 
@@ -16,7 +14,7 @@ public class TextStorage implements MessageText {
         this.text = text;
     }
 
-    public TextStorage(TextDecorator decorator) {
+    public TextStorage(TextFormatter decorator) {
         setName(decorator.getName());
         setText(decorator.getText());
     }
@@ -35,6 +33,16 @@ public class TextStorage implements MessageText {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public boolean canHandle(String identifier) {
+        return false;
+    }
+
+    @Override
+    public void setBase(Formatter base) {
+
     }
 
     @Override

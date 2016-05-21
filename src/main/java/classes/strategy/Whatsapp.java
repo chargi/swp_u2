@@ -16,5 +16,6 @@ public class Whatsapp extends SaveContext implements Strategy {
 
     public Whatsapp() {
         setSavePath("whatsapp");
+        setIdentifier("whatsapp");
     }
 }

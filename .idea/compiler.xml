@@ -33,7 +33,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="fhnotify" target="1.7" />
+      <module name="fhnotify" target="1.8" />
       <module name="swp_u2" target="1.7" />
     </bytecodeTargetLevel>
   </component>

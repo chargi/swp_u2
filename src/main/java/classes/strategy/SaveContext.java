@@ -14,6 +14,7 @@ public abstract class SaveContext implements Strategy {
     private String message;
     private String savePath;
     private String user;
+    private String identifier;
 
     public void setMessage(String arg0) {
         message = arg0;
@@ -39,11 +40,33 @@ public abstract class SaveContext implements Strategy {
         return user;
     }
 
+    protected void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    private String getIdentifier() {
+        return identifier;
+    }
+
     //Implemented saveMessage in SaveContext, because every strategy uses the same writing mechanism
     public void saveMessage() {
         String wd = System.getProperty("user.dir");
+        String dirPath = wd+"\\"+getSavePath();
         String completePath = wd+"\\"+getSavePath()+"\\"+getUser();
+        File toDir = new File(dirPath);
         File toSave = new File(completePath);
+        if (!toDir.exists()) {
+            toDir.mkdir();
+        }
+
+        if (!toSave.exists()) {
+            try {
+                toSave.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         if (toSave.canWrite()) {
             try {
                 FileWriter fw = new FileWriter(toSave);
@@ -54,5 +77,18 @@ public abstract class SaveContext implements Strategy {
                 e.printStackTrace();
             }
         }
+        else {
+            try {
+                throw new Exception("Couldn't write message to output directory");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean canHandle(String identifier) {
+        if (getIdentifier().equals(identifier))
+            return true;
+        return false;
     }
 }

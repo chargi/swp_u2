@@ -11,5 +11,6 @@ public class Email extends SaveContext implements Strategy {
 
     public Email() {
         setSavePath("email");
+        setIdentifier("email");
     }
 }
