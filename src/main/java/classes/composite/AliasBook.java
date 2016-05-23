@@ -1,7 +1,6 @@
 package classes.composite;
 
 import com.github.fhtw.swp.tutorium.composite.AddComponent;
-import com.github.fhtw.swp.tutorium.composite.ComponentOperation;
 import com.github.fhtw.swp.tutorium.composite.Composite;
 import interfaces.Alias;
 
@@ -35,14 +34,21 @@ public class AliasBook implements Alias {
         return name;
     }
 
+    public boolean isValidAlias(String alias) {
+        if (getAliasUsers(alias) != null)
+            return true;
+        return false;
+    }
+
     @Override
-    public List<Alias> convertToList() {
-        List<Alias> allRecipients = new ArrayList<Alias>();
+    public List<Alias> getAliasUsers(String filter) {
+        List<Alias> recipients = new ArrayList<Alias>();
 
         for (Alias a : al) {
-            allRecipients.addAll(a.convertToList());
+            if (a.getName().equals(filter))
+                recipients.addAll(a.getAliasUsers(filter));
         }
 
-        return allRecipients;
+        return recipients;
     }
 }

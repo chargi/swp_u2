@@ -23,9 +23,10 @@ public class User implements Alias {
     }
 
     @Override
-    public List<Alias> convertToList() {
+    public List<Alias> getAliasUsers(String filter) {
         List<Alias> temp = new ArrayList<>();
-        temp.add(this);
+        if (getName().equals(filter))
+            temp.add(this);
         return temp;
     }
 }

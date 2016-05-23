@@ -35,10 +35,8 @@ public class JSONSubjectParser {
             JSONObject jsonObject = (JSONObject) obj;
 
             JSONArray subscribers = (JSONArray) jsonObject.get("subscribers");
-            System.out.println(subscribers);
 
             JSONArray aliases = (JSONArray) jsonObject.get("alias");
-            System.out.println(aliases);
 
             //add subscribers to subjects
             for (Object s : subscribers) {
@@ -48,14 +46,14 @@ public class JSONSubjectParser {
 
             for (Object a : aliases) {
                 JSONObject allowedAliasObject = (JSONObject)a;
-                String allowedAliasName = (String) jsonObject.get("name");
+                String allowedAliasName = (String) allowedAliasObject.get("name");
                 AliasBook ab = new AliasBook(allowedAliasName);
                 allowedSubscriber.add(allowedAliasName);
 
-                JSONArray aliasNames = (JSONArray) jsonObject.get("for");
+                JSONArray aliasNames = (JSONArray) allowedAliasObject.get("for");
                 for (Object n : aliasNames) {
-                    JSONObject aliasNameObject = (JSONObject)n;
-                    String aliasName = (String)aliasNameObject.toString();
+                    //JSONObject aliasNameObject = (JSONObject)n;
+                    String aliasName = (String)n;
 
                     if (!allowedSubscriber.contains(aliasName)) {
                         validConfig = false;

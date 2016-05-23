@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface Alias {
     @ComponentOperation
-    public List<Alias> convertToList();
+    List<Alias> getAliasUsers(String filter);
+    String getName();
 }

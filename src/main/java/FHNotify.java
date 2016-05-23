@@ -4,6 +4,7 @@ import classes.helper.JSONSubjectParser;
 import classes.strategy.Email;
 import classes.strategy.Telegram;
 import classes.strategy.Whatsapp;
+import interfaces.Alias;
 import interfaces.Formatter;
 import interfaces.Strategy;
 import joptsimple.OptionParser;
@@ -15,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,19 +34,24 @@ public class FHNotify {
         String strategy;
 
         //Mockup args
-        String[] mockArgs = {"--config", "c:\\java\\swp_u2\\config.json", "--message", "c:\\java\\test.txt", "--format", "casual-greeting,formal-greeting,christmas", "--transport", "whatsapp" };
+        String[] mockArgs = {"--config", "c:\\java\\swp_u2\\config.json", "--message", "c:\\java\\test.txt", "--format", "casual-greeting,formal-greeting,christmas", "--transport", "whatsapp", "se15m001", "bif1", "bif3", "if12b017" };
 
+        //Get config Options and given Names/Aliases
         OptionParser parser = new OptionParser();
         parser.accepts("config", "Declare config file").withOptionalArg().ofType(String.class);
         parser.accepts("message", "Declare message file").withRequiredArg().ofType(String.class);
         parser.accepts("format", "Set text formatters").withOptionalArg();
         parser.accepts("transport", "Declare way of transport").withRequiredArg().ofType(String.class);
+        parser.allowsUnrecognizedOptions();
+
         OptionSet options = parser.parse(mockArgs);
         String configJSON = (String) options.valueOf("config");
         String configMessage = (String) options.valueOf("message");
         String configFormat = (String) options.valueOf("format");
         String configTransport = (String) options.valueOf("transport");
         String[] configFormats = configFormat.split(",");
+
+        List<?> argGivenNames = options.nonOptionArguments();
 
 
         /* COMPOSITION
@@ -55,21 +62,27 @@ public class FHNotify {
         */
 
 
-        //TODO: Replace MockCode with JSON Reader
         JSONSubjectParser jsp = new JSONSubjectParser();
         jsp.setFile(configJSON);
         jsp.convert();
         AliasBook root = jsp.getRoot();
-
-        //String[] an Empfängern aus ArgParser
-        //for Schleife > an root geben > funktion gibt Liste an echten Subscribern zurück
-        //Sollte root Subscriber/Alias nicht kennen, beendet er: THROW HOLLADARO
-        //Ergebnis an distribution Liste anhängen
-
         List<String> distribution = new ArrayList<String>();
-        distribution.add("Alexa Hundert");
-        distribution.add("Max Test");
-        distribution.add("Berni Blume");
+        List<Alias> distributionAlias = new ArrayList<Alias>();
+
+        //Filter a List of Aliases out of given Aliases
+        for (Object argGivenName : argGivenNames) {
+            String name = (String)argGivenName;
+
+            if (!root.isValidAlias(name))
+                throw new IllegalArgumentException("User/Alias not resolvable from configuration file");
+
+            distributionAlias.addAll(root.getAliasUsers(name));
+        }
+
+        //Get subscriber names
+        for (Alias user : distributionAlias) {
+            distribution.add(user.getName());
+        }
 
         /* Message einlesen
         * Nur Text einlesen
@@ -88,7 +101,6 @@ public class FHNotify {
         else {
             throw new Exception("Message File cannot be read/not found");
         }
-
 
 
         //Generate list of strategies and choose according strategy
