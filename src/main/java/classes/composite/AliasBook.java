@@ -2,6 +2,7 @@ package classes.composite;
 
 import com.github.fhtw.swp.tutorium.composite.AddComponent;
 import com.github.fhtw.swp.tutorium.composite.Composite;
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 import interfaces.Alias;
 
 import java.util.ArrayList;
@@ -34,9 +35,23 @@ public class AliasBook implements Alias {
         return name;
     }
 
+    @Override
+    public Alias getAlias(String name) {
+        for (Alias a : al) {
+            if (a.getName().equals(name))
+                return a;
+        }
+        return null;
+    }
+
     public boolean isValidAlias(String alias) {
-        if (getAliasUsers(alias) != null)
+        for (Alias a : al) {
+            if (a.getName().equals(alias))
+                return true;
+        }
+        if (getAliasUsers(alias).size() > 0)
             return true;
+
         return false;
     }
 
@@ -45,8 +60,19 @@ public class AliasBook implements Alias {
         List<Alias> recipients = new ArrayList<Alias>();
 
         for (Alias a : al) {
-            if (a.getName().equals(filter))
-                recipients.addAll(a.getAliasUsers(filter));
+            if (a.getName().equals(filter)) {
+                recipients.addAll(a.getAliasUsers(a.getName()));
+
+/*               for (Alias b : a.getAllAliases()) {
+                    recipients.addAll(b.getAllAliases());
+               }*/
+            }
+        }
+
+        if (this.getName().equals(filter)) {
+            for (Alias a : al) {
+                recipients.addAll(a.getAliasUsers(a.getName()));
+            }
         }
 
         return recipients;

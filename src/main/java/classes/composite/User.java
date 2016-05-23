@@ -23,6 +23,13 @@ public class User implements Alias {
     }
 
     @Override
+    public Alias getAlias(String name) {
+        if (getName().equals(name))
+            return this;
+        return null;
+    }
+
+    @Override
     public List<Alias> getAliasUsers(String filter) {
         List<Alias> temp = new ArrayList<>();
         if (getName().equals(filter))

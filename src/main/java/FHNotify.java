@@ -1,5 +1,6 @@
 import classes.composite.AliasBook;
 import classes.decorator.*;
+import classes.helper.HomeDirTranslator;
 import classes.helper.JSONSubjectParser;
 import classes.strategy.Email;
 import classes.strategy.Telegram;
@@ -9,9 +10,6 @@ import interfaces.Formatter;
 import interfaces.Strategy;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,6 +25,9 @@ public class FHNotify {
     public static void main(String[] args) throws Exception {
         System.out.println("--Starting FHNotify--\n");
 
+        //Initializing JSON Parser
+        JSONSubjectParser jsp = new JSONSubjectParser();
+
         //Set arguments
         String configPath;
         String messagePath;
@@ -34,7 +35,7 @@ public class FHNotify {
         String strategy;
 
         //Mockup args
-        String[] mockArgs = {"--config", "c:\\java\\swp_u2\\config.json", "--message", "c:\\java\\test.txt", "--format", "casual-greeting,formal-greeting,christmas", "--transport", "whatsapp", "se15m001", "bif1", "bif3", "if12b017" };
+        //String[] mockArgs = {"--config", "c:\\java\\swp_u2\\config.json", "--message", "c:\\java\\test.txt", "--format", "casual-greeting,formal-greeting,christmas", "--transport", "whatsapp", "se15m001", "bif1", "bif3", "if12b017" };
 
         //Get config Options and given Names/Aliases
         OptionParser parser = new OptionParser();
@@ -44,12 +45,28 @@ public class FHNotify {
         parser.accepts("transport", "Declare way of transport").withRequiredArg().ofType(String.class);
         parser.allowsUnrecognizedOptions();
 
-        OptionSet options = parser.parse(mockArgs);
+        OptionSet options = parser.parse(args);
         String configJSON = (String) options.valueOf("config");
+        if (configJSON != null) {
+            configJSON = HomeDirTranslator.replaceTilde(configJSON);
+            jsp.setFile(configJSON);
+        }
+
         String configMessage = (String) options.valueOf("message");
+        if (configMessage == null) {
+            throw new IllegalArgumentException("No message given");
+        }
+        configMessage = HomeDirTranslator.replaceTilde(configMessage);
+
         String configFormat = (String) options.valueOf("format");
         String configTransport = (String) options.valueOf("transport");
+
+        if (configFormat == null) {
+            configFormat = "dummyConfig";
+        }
+
         String[] configFormats = configFormat.split(",");
+
 
         List<?> argGivenNames = options.nonOptionArguments();
 
@@ -61,9 +78,6 @@ public class FHNotify {
         * arg: [--config path]
         */
 
-
-        JSONSubjectParser jsp = new JSONSubjectParser();
-        jsp.setFile(configJSON);
         jsp.convert();
         AliasBook root = jsp.getRoot();
         List<String> distribution = new ArrayList<String>();
@@ -179,6 +193,6 @@ public class FHNotify {
         }
 
 
-        System.out.println(System.getProperty("user.dir"));
+        //System.out.println(System.getProperty("user.dir"));
     }
 }

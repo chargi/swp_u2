@@ -11,4 +11,5 @@ public interface Alias {
     @ComponentOperation
     List<Alias> getAliasUsers(String filter);
     String getName();
+    Alias getAlias(String name);
 }
